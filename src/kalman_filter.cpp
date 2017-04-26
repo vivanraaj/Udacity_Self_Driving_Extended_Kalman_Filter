@@ -70,7 +70,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   }
 
 	float c2 = atan2(py,px);
-	float c3 = (px*vx + py*py/c1);
+	float c3 = (px*vx + py*vy)/c1;
 
   H_radar << c1,c2,c3 ;
 

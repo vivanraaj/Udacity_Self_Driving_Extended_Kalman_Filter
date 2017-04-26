@@ -49,6 +49,7 @@ void check_files(ifstream& in_file, string& in_name,
   }
 }
 
+// code below mainly used for embedded programming 
 int main(int argc, char* argv[]) {
 
   check_arguments(argc, argv);
@@ -78,6 +79,7 @@ int main(int argc, char* argv[]) {
 
     // reads first element from the current line
     iss >> sensor_type;
+    // below == 0 means they compare equal
     if (sensor_type.compare("L") == 0) {
       // LASER MEASUREMENT
 
@@ -160,7 +162,7 @@ int main(int argc, char* argv[]) {
     }
 
     // output the ground truth packages
-    out_file_ << gt_pack_list[k].gt_values_(0) << "\t";
+    out_file_ << gt_pack_list[k].gt_values_(0) << "\t";     // /t means extra space in the same line
     out_file_ << gt_pack_list[k].gt_values_(1) << "\t";
     out_file_ << gt_pack_list[k].gt_values_(2) << "\t";
     out_file_ << gt_pack_list[k].gt_values_(3) << "\n";

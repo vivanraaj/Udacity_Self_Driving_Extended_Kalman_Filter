@@ -2,7 +2,6 @@
 #include "tools.h"
 #include "Eigen/Dense"
 #include <iostream>
-#define EPS 0.0001 // A very small number
 
 using namespace std;
 using Eigen::MatrixXd;
@@ -99,12 +98,6 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
       // since its already in px, py state
       ekf_.x_ << measurement_pack.raw_measurements_(0),measurement_pack.raw_measurements_(1),0.0,0.0;
     }
-
-    // Deal with the special case initialisation problems
-    if (fabs(ekf_.x_(0)) < EPS and fabs(ekf_.x_(1)) < EPS){
-		ekf_.x_(0) = EPS;
-		ekf_.x_(1) = EPS;
-	  }
 
     // test new method
     previous_timestamp_ = measurement_pack.timestamp_;

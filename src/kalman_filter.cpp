@@ -70,11 +70,14 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
 	//atan2() returns values between -pi and pi.
 	float c2 = atan2(py,px);
 
-	float c3 = (px*vx + py*vy)/c1;
+	float c3 = ((px*vx + py*vy)/c1);
 
   H_radar << c1,c2,c3 ;
 
   VectorXd y = z - H_radar;
+
+	while (y[1] < -M_PI) y[1] += 2 * M_PI; while (y[1] > M_PI) y[1] -= 2 * M_PI;
+
 	MatrixXd Ht = H_.transpose();
 	MatrixXd S = H_ * P_ * Ht + R_;
 	MatrixXd Si = S.inverse();

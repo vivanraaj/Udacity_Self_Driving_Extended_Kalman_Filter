@@ -2,6 +2,8 @@
     "files.associations": {
         "chrono": "cpp",
         "slist": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "vector": "cpp",
+        "sstream": "cpp"
     }
 }

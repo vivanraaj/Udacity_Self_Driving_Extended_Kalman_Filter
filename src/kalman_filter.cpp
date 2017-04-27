@@ -32,6 +32,8 @@ void KalmanFilter::Update(const VectorXd &z) {
   TODO:
     * update the state by using Kalman Filter equations
   */
+	
+
 	VectorXd z_pred = H_ * x_;
 	VectorXd y = z - z_pred;
 	MatrixXd Ht = H_.transpose();
@@ -52,6 +54,9 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   TODO:
     * update the state by using Extended Kalman Filter equations
   */
+
+
+
   VectorXd H_radar(3);
 	//recover state parameters
 	float px = x_(0);
@@ -62,14 +67,9 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
 	//pre-compute a set of terms to avoid repeated calculation
 	float c1 = sqrt(px*px+py*py);
 
-	//check division by zero
-  if(c1 < .00001) {
-    px += .001;
-    py += .001;
-    c1 = sqrt(px * px + py * py);
-  }
-
+	//atan2() returns values between -pi and pi.
 	float c2 = atan2(py,px);
+
 	float c3 = (px*vx + py*vy)/c1;
 
   H_radar << c1,c2,c3 ;
